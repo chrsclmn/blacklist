@@ -16,7 +16,7 @@ jobs:
       id: make
       run: |
         make bind9.conf hosts.txt
-        echo '::set-output name=tag::v'$(date +%Y%m%d)
+        echo ::set-output name=tag::v$(date +%Y%m%d)
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1

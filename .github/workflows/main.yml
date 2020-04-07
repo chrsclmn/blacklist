@@ -13,15 +13,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run make
-      run: make bind9.conf hosts.txt
+      id: make
+      run: |
+        make bind9.conf hosts.txt
+        echo '::set-output name=tag::v'$(date +%Y%m%d)
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ steps.make.output.tag }}
+        release_name: Release ${{ steps.make.output.tag }}
         draft: false
         prerelease: false
     - name: Upload Release Asset

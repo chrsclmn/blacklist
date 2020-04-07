@@ -3,4 +3,4 @@ hosts.txt:
 
 .PHONY: clean
 clean:
-	rm -f hosts.conf hosts.txt
+	rm -f hosts.txt

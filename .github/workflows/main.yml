@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run make
-      run: make
+      run: make bind9.conf hosts.txt
     - name: Upload hosts.txt
       uses: actions/upload-artifact@v1
       with:

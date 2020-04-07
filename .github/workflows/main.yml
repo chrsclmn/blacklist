@@ -1,10 +1,6 @@
 name: CI
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
   build:
@@ -13,3 +9,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run make
       run: make
+    - name: Upload hosts.txt
+      uses: actions/upload-artifact@v1
+      with:
+        name: hosts.txt
+        path: hosts.txt

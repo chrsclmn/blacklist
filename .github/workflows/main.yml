@@ -27,8 +27,8 @@ jobs:
         release_name: Release ${{ steps.make.outputs.tag }}
         draft: false
         prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
+    - name: Upload hosts.txt
+      id: upload-hosts-txt
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,4 +36,14 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./hosts.txt
         asset_name: hosts.txt
+        asset_content_type: text/plain
+    - name: Upload bind9.conf
+      id: upload-bind9-conf
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./bind9.conf
+        asset_name: bind9.conf
         asset_content_type: text/plain

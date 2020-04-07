@@ -23,8 +23,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.make.output.tag }}
-        release_name: Release ${{ steps.make.output.tag }}
+        tag_name: ${{ steps.make.outputs.tag }}
+        release_name: Release ${{ steps.make.outputs.tag }}
         draft: false
         prerelease: false
     - name: Upload Release Asset

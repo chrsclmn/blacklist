@@ -19,3 +19,8 @@ jobs:
       with:
         name: hosts.txt
         path: hosts.txt
+    - name: Upload bind9.conf
+      uses: actions/upload-artifact@v1
+      with:
+        name: bind9.conf
+        path: bind9.conf

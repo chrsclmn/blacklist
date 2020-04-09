@@ -12,7 +12,7 @@ jobs:
     - name: Run make
       id: make
       run: |
-        make bind9.conf hosts.txt
+        make bind9.conf hosts
         echo ::set-output name=tag::v$(date +%Y%m%d)
     - name: Create Release
       id: create_release
@@ -30,7 +30,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./hosts.txt
+        asset_path: ./hosts
         asset_name: hosts.txt
         asset_content_type: text/plain
     - name: Upload bind9.conf

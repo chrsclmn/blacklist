@@ -5,7 +5,7 @@ rpz.zone: hostnames
 	echo '$$TTL 1h' > $@
 	echo '@ SOA localhost. root.localhost. (1 1h 15m 30d 2h)' >> $@
 	echo '@ NS  localhost.' >> $@
-	sed -e 's/.*/\0 A 127.0.0.1/' < $< >> $@
+	sed -e 's/.*/\0 CNAME ./' < $< >> $@
 
 hostnames: adaway.hostnames stevenblack.hostnames winhelp2002.hostnames custom.hostnames
 	cat $^ | egrep -v '^local(host(\.localdomain)?)?$$' | egrep -v '^[0-9.]+$$' | sort -u > $@

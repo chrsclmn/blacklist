@@ -1,11 +1,12 @@
 hosts: hostnames
 	sed -e 's/^/127.0.0.1 /' < $< > $@
 
-rpz.zone: hostnames
+rpz.zone: hostnames custom.rpz
 	echo '$$TTL 1h' > $@
 	echo '@ SOA localhost. root.localhost. (1 1h 15m 30d 2h)' >> $@
 	echo '@ NS  localhost.' >> $@
-	sed -e 's/.*/\0 CNAME ./' < $< >> $@
+	sed -e 's/$$/ CNAME ./' < $< >> $@
+	cat custom.rpz >> $@
 
 bind9.conf: hostnames
 	sed -e 's/.*/zone "\0" IN { type master; notify no; file "adblock.zone"; };/' < $< > $@
@@ -27,4 +28,7 @@ winhelp2002.hosts:
 
 .PHONY: clean
 clean:
-	rm -f hosts rpz.zone bind9.conf hostnames *.hosts *.hostnames
+	rm -f hosts rpz.zone bind9.conf
+	rm -f hostnames
+	rm -f adaway.hosts stevenblack.hosts winhelp2002.hosts
+	rm -f adaway.hostnames stevenblack.hostnames winhelp2002.hostnames

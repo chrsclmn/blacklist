@@ -12,7 +12,7 @@ jobs:
     - name: Run make
       id: make
       run: |
-        make bind9.conf hosts
+        make hosts rpz.zone
         echo ::set-output name=tag::v$(date +%Y%m%d)
     - name: Create Release
       id: create_release
@@ -33,12 +33,12 @@ jobs:
         asset_path: ./hosts
         asset_name: hosts.txt
         asset_content_type: text/plain
-    - name: Upload bind9.conf
+    - name: Upload rpz.zone
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./bind9.conf
-        asset_name: bind9.conf
+        asset_path: ./rpz.zone
+        asset_name: rpz.zone
         asset_content_type: text/plain

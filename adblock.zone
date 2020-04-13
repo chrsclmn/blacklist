@@ -1,5 +1,0 @@
-$TTL 1h
-@ SOA localhost. root.localhost. (1 1h 15m 30d 2h) 
-@ NS  localhost.
-@ A   127.0.0.1
-* A   127.0.0.1

@@ -1,8 +1,11 @@
-bind9.conf: hostnames
-	sed -e 's/.*/zone "\0" IN { type master; notify no; file "adblock.zone"; };/' < $< > $@
-
 hosts: hostnames
 	sed -e 's/^/127.0.0.1 /' < $< > $@
+
+rpz.zone: hostnames
+	echo '$$TTL 1h' > $@
+	echo '@ SOA localhost. root.localhost. (1 1h 15m 30d 2h)' >> $@
+	echo '@ NS  localhost.' >> $@
+	sed -e 's/.*/\0 A 127.0.0.1/' < $< >> $@
 
 hostnames: adaway.hostnames stevenblack.hostnames winhelp2002.hostnames
 	cat $^ | egrep -v '^local(host(\.localdomain)?)?$$' | egrep -v '^[0-9.]+$$' | sort -u > $@
@@ -21,4 +24,4 @@ winhelp2002.hosts:
 
 .PHONY: clean
 clean:
-	rm -f bind9.conf hosts hostnames *.hosts *.hostnames
+	rm -f hosts rpz.zone hostnames *.hosts *.hostnames

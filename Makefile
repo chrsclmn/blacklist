@@ -7,7 +7,7 @@ rpz.zone: hostnames
 	echo '@ NS  localhost.' >> $@
 	sed -e 's/.*/\0 A 127.0.0.1/' < $< >> $@
 
-hostnames: adaway.hostnames stevenblack.hostnames winhelp2002.hostnames
+hostnames: adaway.hostnames stevenblack.hostnames winhelp2002.hostnames custom.hostnames
 	cat $^ | egrep -v '^local(host(\.localdomain)?)?$$' | egrep -v '^[0-9.]+$$' | sort -u > $@
 
 %.hostnames: %.hosts

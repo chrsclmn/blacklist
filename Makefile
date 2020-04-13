@@ -7,6 +7,9 @@ rpz.zone: hostnames
 	echo '@ NS  localhost.' >> $@
 	sed -e 's/.*/\0 CNAME ./' < $< >> $@
 
+bind9.conf: hostnames
+	sed -e 's/.*/zone "\0" IN { type master; notify no; file "adblock.zone"; };/' < $< > $@
+
 hostnames: adaway.hostnames stevenblack.hostnames winhelp2002.hostnames custom.hostnames
 	cat $^ | egrep -v '^local(host(\.localdomain)?)?$$' | egrep -v '^[0-9.]+$$' | sort -u > $@
 
@@ -24,4 +27,4 @@ winhelp2002.hosts:
 
 .PHONY: clean
 clean:
-	rm -f hosts rpz.zone hostnames *.hosts *.hostnames
+	rm -f hosts rpz.zone bind9.conf hostnames *.hosts *.hostnames

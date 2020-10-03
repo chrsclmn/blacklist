@@ -11,7 +11,7 @@ rpz.zone: hostnames custom.rpz
 bind9.conf: hostnames
 	sed -e 's/.*/zone "\0" IN { type master; notify no; file "adblock.zone"; };/' < $< > $@
 
-hostnames: adaway.hostnames stevenblack.hostnames winhelp2002.hostnames custom.hostnames
+hostnames: adaway.hostnames stevenblack.hostnames winhelp2002.hostnames custom.hostnames facebook.hostnames
 	cat $^ | egrep -v '^local(host(\.localdomain)?)?$$' | egrep -v '^[0-9.]+$$' | sort -u > $@
 
 %.hostnames: %.hosts
@@ -25,6 +25,9 @@ stevenblack.hosts:
 
 winhelp2002.hosts:
 	curl -s http://winhelp2002.mvps.org/hosts.txt -o $@
+
+facebook.hosts:
+	curl -s https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/facebook/all -o $@
 
 .PHONY: clean
 clean:

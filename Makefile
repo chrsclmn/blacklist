@@ -33,5 +33,5 @@ facebook.hosts:
 clean:
 	rm -f hosts rpz.zone bind9.conf
 	rm -f hostnames
-	rm -f adaway.hosts stevenblack.hosts winhelp2002.hosts
-	rm -f adaway.hostnames stevenblack.hostnames winhelp2002.hostnames
+	rm -f adaway.hosts stevenblack.hosts winhelp2002.hosts facebook.hosts
+	rm -f adaway.hostnames stevenblack.hostnames winhelp2002.hostnames facebook.hostnames

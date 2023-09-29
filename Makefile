@@ -24,7 +24,7 @@ stevenblack.hosts:
 	curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts -o $@
 
 winhelp2002.hosts:
-	curl -s http://winhelp2002.mvps.org/hosts.txt -o $@
+	curl -s https://winhelp2002.mvps.org/hosts.txt -o $@
 
 facebook.hosts:
 	curl -s https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/facebook/all -o $@
